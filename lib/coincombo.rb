@@ -4,42 +4,41 @@ class Coins
   end
 
   def calculate()
-    denomination_index = 0
-    coin_count = 0
-    denominations = [25, 10, 5, 1]
-    solution = [0, 0, 0, 0]
-    denominations.each do |step|
-      if step == 25 || step == 10 || step == 5
-          if (@money - step >= 0)
-            until @money - step < 0
-              coin_count += 1
-              @money = @money - step
-            end
-          end
-          solution[denomination_index] = coin_count
-          coin_count = 0
-          denomination_index += 1
-      else
-        coin_count = 0
-        until @money == 0
-          coin_count += 1
-          @money = @money - step
-          solution[3] = coin_count
-        end
-      end
-    end
+  quarters_remainder = 0
+  nickels_remainder = 0
+  dimes_remainder = 0
+  dimes = 0
+  quarters = 0
+  nickels = 0
+  pennies = 0
+
+  quarters = @money / 25
+  quarters_remainder =  @money % 25
+  if quarters_remainder != 0
+    dimes = quarters_remainder / 10
+    dimes_remainder = quarters_remainder % 10
+  end
+  if dimes_remainder != 0
+    nickels = dimes_remainder / 5
+    nickels_remainder = dimes_remainder % 5
+  end
+  if nickels_remainder != 0
+    pennies = nickels_remainder
+  end
+
+
     changeOutput = ""
-    if solution[0] != 0
-      changeOutput = changeOutput + "#{solution[0]} quarters "
+    if quarters != 0
+      changeOutput = changeOutput + "#{quarters} quarters "
     end
-    if solution[1] != 0
-      changeOutput = changeOutput + "#{solution[1]} dimes "
+    if dimes != 0
+      changeOutput = changeOutput + "#{dimes} dimes "
     end
-    if solution[2] != 0
-      changeOutput = changeOutput + "#{solution[2]} nickels "
+    if nickels != 0
+      changeOutput = changeOutput + "#{nickels} nickels "
     end
-    if solution[3] != 0
-      changeOutput = changeOutput + "#{solution[3]} pennies."
+    if pennies != 0
+      changeOutput = changeOutput + "#{pennies} pennies."
     end
     return changeOutput
   end
