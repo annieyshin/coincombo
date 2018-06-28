@@ -10,7 +10,7 @@ class Coins
     # variable forCount counts how many times iterating through if loop
     denominations = [25, 10, 5, 1]
     # denominations is an array of each coin amount
-    solution = []
+    solution = [0, 0, 0, 0]
     # solution is an array for the amount of coins for the answer
     @money = @money * 100
     # changes the cent amount into whole numbers
@@ -27,15 +27,19 @@ class Coins
         #if you cannot go subtract 25 cents anymore, you RESET forCount HERE, and then it knows to go through next smallest denomination because of the variable below untilCount
         untilCount += 1
       end
+      return solution
     end
       changeOutput = ""
       if solution[0] != 0
         changeOutput = changeOutput + "#{solution[0]} quarters, "
-      elsif solution[1] != 0
+      end
+      if solution[1] != 0
         changeOutput = changeOutput + "#{solution[1]} dimes, "
-      elsif solution[2] != 0
+      end
+      if solution[2] != 0
         changeOutput = changeOutput + "#{solution[2]} nickels, "
-      elsif solution[3] != 0
+      end
+      if solution[3] != 0
         changeOutput = changeOutput + "#{solution[3]} pennies."
       end
       return changeOutput
