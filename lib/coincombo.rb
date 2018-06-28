@@ -1,6 +1,6 @@
 class Coins
   def initialize(amount)
-    @money = amount
+    @money = amount.to_i
   end
 
   def calculate()
@@ -16,15 +16,15 @@ class Coins
     # changes the cent amount into whole numbers
     until @money == 0 do
       #condition by which we execute the loop
-      if @money - denominations[untilCount] > 0
+      if @money - denominations[untilCount].to_i > 0
       # if for example, you have 75 cents, and you can subtract 25 cents, setting untilCount to 1, you can loop again. Keep repeating the loop below.
-        @money = @money - denominations[untilCount]
+        @money = @money - denominations[untilCount].to_i
         forCount += 1
       else
-        solution[untilCount].push(forCount)
+        solution[untilCount] = forCount
         #pushing how many times you were able to subtract 25 cents here
         forCount = 0
-        #if you cannot go subtract 25 cents anymore, you reset forCount HERE, and then it knows to go through next smallest denomination because of the variable below untilCount
+        #if you cannot go subtract 25 cents anymore, you RESET forCount HERE, and then it knows to go through next smallest denomination because of the variable below untilCount
         untilCount += 1
       end
     end
